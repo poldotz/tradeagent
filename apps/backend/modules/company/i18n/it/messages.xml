@@ -8,6 +8,40 @@
         <source>Company</source>
         <target>Azienda</target>
       </trans-unit>
+      <trans-unit id="2">
+          <source>New</source>
+          <target>Nuovo</target>
+      </trans-unit>
+      <trans-unit id="3">
+          <source>Name</source>
+          <target>Denominazione</target>
+      </trans-unit>
+      <trans-unit id="4">
+          <source>Vat</source>
+          <target>P.IVA</target>
+      </trans-unit>
+      <trans-unit id="5">
+          <source>Address</source>
+          <target>Indirizzo</target>
+      </trans-unit>
+      <trans-unit id="6">
+          <source>Created at</source>
+          <target>Data Creazione</target>
+      </trans-unit>
+      <trans-unit id="7">
+          <source>Actions</source>
+          <target>Azioni</target>
+      </trans-unit>
+      <trans-unit id="8">
+          <source>New Company</source>
+         <target>Nuova azienda</target>
+      </trans-unit>
+      <trans-unit id="9">
+          <source>Back to list</source>
+          <target>Torna alla lista</target>
+      </trans-unit>
+
+
     </body>
   </file>
 </xliff>

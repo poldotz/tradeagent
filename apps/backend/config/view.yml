@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:    [bootstrap.css,responsive.css,glyphicons.css]
 
-  javascripts:    []
+  javascripts:    [jquery.min.js,jquery-ui/js/jquery-ui-1.9.2.custom.min.js,jquery-ui-touch-punch/jquery.ui.touch-punch.min.js,bootstrap.js]
 
   has_layout:     true
   layout:         layout

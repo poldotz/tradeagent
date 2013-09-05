@@ -10,6 +10,21 @@
  */
 class companyActions extends sfActions
 {
+
+    public function preExecute()
+    {
+        $response = $this->getResponse();
+        $response->addStylesheet('dt.bootstrap.css','last');
+    }
+
+    public function postExecute(){
+        $response = $this->getResponse();
+        $response->addJavaScript('jquery.dataTables.min.js','last');
+        $response->addJavaScript('dt.bootstrap.js','last');
+        $response->addJavaScript('tables.js','last');
+    }
+
+
   public function executeIndex(sfWebRequest $request)
   {
     $this->getUser()->setCulture('it');

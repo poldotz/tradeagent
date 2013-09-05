@@ -8,6 +8,10 @@
         <source>Company</source>
         <target/>
       </trans-unit>
+        <trans-unit id="2">
+            <source>Name</source>
+            <target/>
+        </trans-unit>
     </body>
   </file>
 </xliff>
