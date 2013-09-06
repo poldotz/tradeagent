@@ -12,4 +12,33 @@
  */
 class Address extends BaseAddress
 {
+    protected $_url = 'http://maps.google.com/maps/geo';
+
+    // =======================
+    // = Geocoding Functions =
+    // =======================
+    public function buildGeoQuery($fields)
+    {
+        $query = array();
+        foreach ($fields as $key => $field)
+        {
+            $query[] = $key."=".$field;
+        }
+        return implode('&', $query);
+    }
+
+    public function buildUrlFromQuery($query)
+    {
+        return $this->_url.'?q='.urlencode($query).'&output=csv';
+    }
+
+    public function retrieveGeocodesFromUrl($url)
+    {
+        $codes = explode(',', file_get_contents($url));
+        $geocodes['latitude'] = $codes[2];
+        $geocodes['longitude'] = $codes[3];
+        return $geocodes;
+    }
+
+
 }

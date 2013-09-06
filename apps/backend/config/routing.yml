@@ -6,6 +6,13 @@ homepage:
   url:   /
   param: { module: default, action: index }
 
+
+geolocator_search:
+  url:   /geolocator-search.:sf_format
+  param: { module: address, action: geolocatorSearch, sf_format: html }
+  requirements:
+    sf_format: (?:html|js)
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
