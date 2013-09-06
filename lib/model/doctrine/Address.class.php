@@ -12,32 +12,41 @@
  */
 class Address extends BaseAddress
 {
-    protected $_url = 'http://maps.google.com/maps/geo';
+     const URL = 'http://maps.googleapis.com/maps/api/geocode/json';
 
-    // =======================
-    // = Geocoding Functions =
-    // =======================
-    public function buildGeoQuery($fields)
+
+    public static function buildUrl($query)
     {
-        $query = array();
-        foreach ($fields as $key => $field)
-        {
-            $query[] = $key."=".$field;
+        return Address::URL.'?address='.urlencode($query)."&sensor=false";
+    }
+
+    public static function retrieveGeocodesFromUrl($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER,0); //Change this to a 1 to return headers
+
+        if(sfConfig::has('app_curl_options_proxy_address')){
+            curl_setopt($ch, CURLOPT_PROXY, sfConfig::get('app_curl_options_proxy_address'));
         }
-        return implode('&', $query);
-    }
+        if(sfConfig::has('app_curl_options_proxy_port')){
+            curl_setopt($ch, CURLOPT_PROXYPORT, sfConfig::get('app_curl_options_proxy_port'));
+        }
+        $response = curl_exec($ch);
 
-    public function buildUrlFromQuery($query)
-    {
-        return $this->_url.'?q='.urlencode($query).'&output=csv';
-    }
+        curl_close($ch);
+        $codes = json_decode($response);
 
-    public function retrieveGeocodesFromUrl($url)
-    {
-        $codes = explode(',', file_get_contents($url));
-        $geocodes['latitude'] = $codes[2];
-        $geocodes['longitude'] = $codes[3];
-        return $geocodes;
+        if($codes->status == 'OK'){
+            foreach($codes->results as $result)
+            $results['result'][] = $result->formatted_address;
+        }
+        else{
+            $results['result'][] = 'NO RESULT FOUND';
+        }
+
+        return $results;
     }
 
 

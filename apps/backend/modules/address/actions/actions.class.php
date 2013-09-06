@@ -16,23 +16,25 @@ class addressActions extends sfActions
 
   $form = new GeolocatorSearchForm();
 
+
   $form->bind($request->getParameter($form->getName()));
-
-
   if ($form->isValid())
   {
-      //$address = $form->save();
-        die('ok');
-      //$this->redirect('address/edit?id='.$address->getId());
+    $url = Address::buildUrl(implode(' ',$request->getParameter($form->getName())));
+    $geocodes = Address::retrieveGeocodesFromUrl($url);
+    if ($request->isXmlHttpRequest())
+    {
+        return $this->renderPartial('address/list', array('results' => $geocodes['result']));
+        //sfView::SUCCESS;
+    }
   }
-  $this->form = $form;
-
-  //$this->forward('address','index');
-
-      /*if ($request->isXmlHttpRequest())
-      {
-          return $this->renderPartial('address/list');
-      }*/
+  else{
+          if ($request->isXmlHttpRequest())
+          {
+              return $this->renderPartial('address/errorList', array('form' => $form));
+              //sfView::SUCCESS;
+          }
+      }
   }
 
 
