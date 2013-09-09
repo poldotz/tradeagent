@@ -22,8 +22,13 @@ class Address extends BaseAddress
 
     public static function buildCountryUrl($country = null){
         if(isset($country)){
-            $countries = sfCultureInfo::getInstance($country)->getCountries(null);
-            return Address::URL.'?address='.urlencode($countries[strtoupper($country)])."&sensor=false&region=".$country;
+            // united kingdom
+            ($country == 'gb') ? $region = 'uk' : $region = $country;
+            //$countries = sfCultureInfo::getInstance($region)->getCountries(null);
+            $mcf = new MysfCultureInfo();
+            $culture = $mcf->getIsoByCountry(strtoupper($country));
+            $country = sfCultureInfo::getInstance(substr($culture,0,2))->getCountry(substr($culture,3,2));
+            return Address::URL.'?address='.urlencode($country)."&sensor=false&region=".$region;
 
         }
 

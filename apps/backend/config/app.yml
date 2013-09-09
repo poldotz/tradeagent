@@ -4,5 +4,5 @@
 # default values
 all:
   curl_options:
-    proxy_address: #192.168.5.11
-    proxy_port: #3328
+    proxy_address: 192.168.5.11
+    proxy_port: 3328

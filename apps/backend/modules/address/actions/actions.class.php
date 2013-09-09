@@ -36,8 +36,12 @@ class addressActions extends sfActions
   {
     $url = Address::buildUrl(implode(' ',$request->getParameter($form->getName())));
     $geocodes = Address::retrieveGeocodesFromUrl($url);
+    // versione 5.4
+    //$country = $request->getParameter($form->getName())['country'];
+    // versione 5.3
+    $country = $request->getParameter($form->getName());
+    $country = $country['country'];
 
-    $country = $request->getParameter($form->getName())['country'];
     $country_url = Address::buildCountryUrl(strtolower($country));
     $country_code = Address::retrieveGeocodesFromUrl($country_url);
 
