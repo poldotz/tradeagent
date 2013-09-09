@@ -20,6 +20,16 @@ class Address extends BaseAddress
         return Address::URL.'?address='.urlencode($query)."&sensor=false";
     }
 
+    public static function buildCountryUrl($country = null){
+        if(isset($country)){
+            $countries = sfCultureInfo::getInstance($country)->getCountries(null);
+            return Address::URL.'?address='.urlencode($countries[strtoupper($country)])."&sensor=false&region=".$country;
+
+        }
+
+    }
+
+
     public static function retrieveGeocodesFromUrl($url)
     {
         $ch = curl_init();
@@ -39,11 +49,10 @@ class Address extends BaseAddress
         $codes = json_decode($response);
 
         if($codes->status == 'OK'){
-            foreach($codes->results as $result)
-            $results['result'][] = $result->formatted_address;
+            $results = $codes->results;
         }
         else{
-            $results['result'][] = 'NO RESULT FOUND';
+            $results['result'][] = false;
         }
 
         return $results;

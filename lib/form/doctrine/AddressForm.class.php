@@ -22,7 +22,7 @@ class AddressForm extends BaseAddressForm
       $this->setValidator('city', new sfValidatorString(array(
           'min_length' => 2
       )));
-      $this->setWidget('country', new sfWidgetFormI18nChoiceCountry());
+      $this->setWidget('country', new sfWidgetFormI18nChoiceCountry(array('culture'=> sfConfig::get('default_culture'))));
       $this->setValidator('country',new sfValidatorI18nChoiceCountry());
   }
 }
