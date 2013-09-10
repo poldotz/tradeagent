@@ -46,6 +46,7 @@ class addressActions extends sfActions
 
     if ($request->isXmlHttpRequest())
     {
+        $this->getUser()->setFlash('geocodes',$geocodes);
         return $this->renderPartial('address/list', array('results' => $geocodes));
         //sfView::SUCCESS;
     }
@@ -69,7 +70,25 @@ class addressActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new AddressForm();
+    $geocode = $request->getParameter('geocodes',null);
+
+     if(isset($geocode) && $this->getUser()->hasFlash('geocodes')){
+         $geocodes = $this->getUser()->getFlash('geocodes');
+         $geocode = $geocodes[$geocode];
+         $address = new Address();
+         $address->setRoute($geocode->address_components[1]->long_name.",".$geocode->address_components[0]->long_name);
+         $address->setCity($geocode->address_components[2]->long_name);
+         $address->setProvince($geocode->address_components[4]->long_name);
+         $address->setRegion($geocode->address_components[5]->long_name);
+         $address->setCountry($geocode->address_components[6]->long_name);
+         $address->setPostalCode($geocode->address_components[7]->long_name);
+         $address->setLatitude($geocode->geometry->location->lat);
+         $address->setLongitude($geocode->geometry->location->lng);
+         $this->form = new AddressForm($address);
+     }
+     else{
+        $this->form = new AddressForm();
+     }
   }
 
   public function executeCreate(sfWebRequest $request)

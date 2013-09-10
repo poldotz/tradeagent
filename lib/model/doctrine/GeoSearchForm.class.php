@@ -11,12 +11,13 @@ class GeoSearchForm extends BaseForm
 {
     public function configure()
     {
-        $this->useFields(array('route'));
-
+        $this->disableCSRFProtection();
         $this->setWidget('route', new sfWidgetFormInputText());
         $this->setValidator('route', new sfValidatorString(array(
             'min_length' => 2
-        )));
+        ),array('required' => 'Route: Required.')));
+
+        $this->widgetSchema->setNameFormat('geolocatorSearch[%s]');
 
     }
 }

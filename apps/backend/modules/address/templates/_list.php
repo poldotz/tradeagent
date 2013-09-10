@@ -7,7 +7,9 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
+
 <?php use_helper('GeoUtility') ?>
+
 <?php if(isset($results) && is_object($results)): ?>
 <div class="row-fluid center">
     <div class="widget">
@@ -17,12 +19,12 @@
 
         <div class="widget-body"
             <?php $address = "" ?>
-        <?php foreach($results as $result): ?>
+        <?php foreach($results as $key => $result): ?>
             <div class="row-fluid">
-                <div class="span12"><?php echo link_to($result->formatted_address,'address/new') ?> </div>
+                <div class="span12"><?php echo link_to($result->formatted_address,'address/new?geocodes='.$key) ?> </div>
                 <?php $address .= "{address:'".$result->formatted_address."', data:'".$result->formatted_address."'}," ?>
-                <?php $coordinates[]['lat'] = $result->geometry->location->lat; ?>
-                <?php $coordinates[]['lng'] = $result->geometry->location->lat; ?>
+                <?php $coordinates[$key]['lat'] = $result->geometry->location->lat; ?>
+                <?php $coordinates[$key]['lng'] = $result->geometry->location->lng; ?>
             </div>
         <?php endforeach; ?>
             <?php $address = substr($address,0,strlen($address)-1); ?>
@@ -35,6 +37,7 @@
     </div>
 </div>
     <?php $averagePoint = averageCoodinates($coordinates) ?>
+    <?php echo $averagePoint['lat'].",".$averagePoint['lng'] ?>
     <script type="text/javascript">
 
         $(function(){
@@ -43,7 +46,7 @@
                 map:{
                     options:{
                         center:[<?php echo $averagePoint['lat'].",".$averagePoint['lng'] ?>],
-                        zoom: 4
+                        zoom: 5
                     }
                 },
                 marker:{

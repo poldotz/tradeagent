@@ -10,19 +10,4 @@
  */
 class AddressForm extends BaseAddressForm
 {
-  public function configure()
-  {
-      $this->useFields(array('route','city','country'));
-
-      $this->setWidget('route', new sfWidgetFormInputText());
-      $this->setValidator('route', new sfValidatorString(array(
-          'min_length' => 2
-      )));
-      $this->setWidget('city', new sfWidgetFormInputText());
-      $this->setValidator('city', new sfValidatorString(array(
-          'min_length' => 2
-      )));
-      $this->setWidget('country', new sfWidgetFormI18nChoiceCountry(array('culture'=> sfConfig::get('default_culture'))));
-      $this->setValidator('country',new sfValidatorI18nChoiceCountry());
-  }
 }

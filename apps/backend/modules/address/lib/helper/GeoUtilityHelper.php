@@ -15,8 +15,8 @@ function averageCoodinates($values = array()){
             $sum['lat'] += $value['lat'];
             $sum['lng'] += $value['lng'];
         }
-        $average['lat'] = $sum['lat'] / count($sum['lat']);
-        $average['lng'] = $sum['lng'] / count($sum['lng']);
+        $average['lat'] = $sum['lat'] / count($values);
+        $average['lng'] = $sum['lng'] / count($values);
     }
     return $average;
 }
