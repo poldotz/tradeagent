@@ -7,6 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
+<?php use_helper('GeoUtility') ?>
 <?php if(isset($results) && is_object($results)): ?>
 <div class="row-fluid center">
     <div class="widget">
@@ -20,6 +21,8 @@
             <div class="row-fluid">
                 <div class="span12"><?php echo link_to($result->formatted_address,'address/new') ?> </div>
                 <?php $address .= "{address:'".$result->formatted_address."', data:'".$result->formatted_address."'}," ?>
+                <?php $coordinates[]['lat'] = $result->geometry->location->lat; ?>
+                <?php $coordinates[]['lng'] = $result->geometry->location->lat; ?>
             </div>
         <?php endforeach; ?>
             <?php $address = substr($address,0,strlen($address)-1); ?>
@@ -31,6 +34,7 @@
         </div>
     </div>
 </div>
+    <?php $averagePoint = averageCoodinates($coordinates) ?>
     <script type="text/javascript">
 
         $(function(){
@@ -38,8 +42,8 @@
             $('#geoSearchResutls').gmap3({
                 map:{
                     options:{
-                        center:[<?php echo $country[0]->geometry->location->lat.",".$country[0]->geometry->location->lng ?>],
-                        zoom: 5
+                        center:[<?php echo $averagePoint['lat'].",".$averagePoint['lng'] ?>],
+                        zoom: 4
                     }
                 },
                 marker:{

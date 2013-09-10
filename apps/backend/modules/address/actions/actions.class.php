@@ -28,7 +28,7 @@ class addressActions extends sfActions
   public function executeGeolocatorSearch(sfWebRequest $request){
 
 
-  $form = new GeolocatorSearchForm();
+  $form = new GeoSearchForm();
 
 
   $form->bind($request->getParameter($form->getName()));
@@ -39,15 +39,14 @@ class addressActions extends sfActions
     // versione 5.4
     //$country = $request->getParameter($form->getName())['country'];
     // versione 5.3
-    $country = $request->getParameter($form->getName());
-    $country = $country['country'];
-
-    $country_url = Address::buildCountryUrl(strtolower($country));
-    $country_code = Address::retrieveGeocodesFromUrl($country_url);
+    //$country = $request->getParameter($form->getName());
+    //$country = $country['country'];
+    //$country_url = Address::buildCountryUrl(strtolower($country));
+    //$country_code = Address::retrieveGeocodesFromUrl($country_url);
 
     if ($request->isXmlHttpRequest())
     {
-        return $this->renderPartial('address/list', array('results' => $geocodes,'country'=>$country_code));
+        return $this->renderPartial('address/list', array('results' => $geocodes));
         //sfView::SUCCESS;
     }
   }

@@ -18,32 +18,13 @@
             <div class="row-fluid">
 
                 <!-- Column -->
-                <div class="span3">
+                <div class="span9">
 
                     <!-- Group -->
                     <div class="control-group">
                         <?php echo $form['route']->renderLabel('',array("class"=>'control-label')) ?>
                         <div class="controls"><?php echo $form['route']->render(array('class'=>'span12')) ?></div>
                     </div>
-                </div>
-                <div class="span3">
-                    <!-- // Group END -->
-
-                    <!-- Group -->
-                    <div class="control-group">
-                        <?php echo $form['city']->renderLabel('',array("class"=>'control-label')) ?>
-                        <div class="controls"><?php echo $form['city']->render(array('class'=>'span12')) ?></div>
-                    </div>
-                    <!-- // Group END -->
-                </div>
-                <div class="span3">
-                    <!-- Group -->
-                    <div class="control-group">
-                        <?php echo $form['country']->renderLabel('',array("class"=>'control-label')) ?>
-                        <div class="controls"><?php echo $form['country']->render(array('class'=>'span12')) ?></div>
-                    </div>
-                    <!-- // Group END -->
-
                 </div>
                 <div class="span3">
                     <!-- Form actions -->
