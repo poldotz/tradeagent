@@ -19,7 +19,8 @@ class addressActions extends sfActions
 
     public function postExecute(){
         $response = $this->getResponse();
-        $response->addJavaScript('googlemaps.api.js','last');
+        //$response->addJavaScript('googlemaps.api.js','last');
+        $response->addJavascript("https://maps.googleapis.com/maps/api/js?key=".sfConfig::get('app_gmap_api_key')."&sensor=false");
         $response->addJavaScript('gmap3.js','last');
 
 

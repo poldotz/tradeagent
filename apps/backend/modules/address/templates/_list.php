@@ -37,7 +37,6 @@
     </div>
 </div>
     <?php $averagePoint = averageCoodinates($coordinates) ?>
-    <?php echo $averagePoint['lat'].",".$averagePoint['lng'] ?>
     <script type="text/javascript">
 
         $(function(){
