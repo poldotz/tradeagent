@@ -17,7 +17,7 @@ class Address extends BaseAddress
 
     public static function buildUrl($query)
     {
-        return Address::URL.'?address='.urlencode($query)."&sensor=false";
+        return Address::URL.'?address='.urlencode($query)."&sensor=false&language=".substr(sfConfig::get('default_culture'),0,2);
     }
 
     public static function buildCountryUrl($country = null){

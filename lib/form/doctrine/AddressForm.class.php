@@ -10,4 +10,7 @@
  */
 class AddressForm extends BaseAddressForm
 {
+    public function configure(){
+        $this->enableCSRFProtection();
+    }
 }

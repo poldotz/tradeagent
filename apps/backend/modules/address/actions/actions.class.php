@@ -77,14 +77,53 @@ class addressActions extends sfActions
          $geocodes = $this->getUser()->getFlash('geocodes');
          $geocode = $geocodes[$geocode];
          $address = new Address();
-         $address->setRoute($geocode->address_components[1]->long_name.",".$geocode->address_components[0]->long_name);
-         $address->setCity($geocode->address_components[2]->long_name);
-         $address->setProvince($geocode->address_components[4]->long_name);
-         $address->setRegion($geocode->address_components[5]->long_name);
-         $address->setCountry($geocode->address_components[6]->long_name);
-         $address->setPostalCode($geocode->address_components[7]->long_name);
+
+         $street = "";
+         $street_number = "";
+         $city = "";
+         $province = "";
+         $region = "";
+         $country = "";
+         $postal_code = "";
+
+         foreach($geocode->address_components as $component){
+             switch($component->types[0]){
+                 case 'route':
+                     $street = $component->long_name;
+                     break;
+                 case 'street_number':
+                     $street_number = $component->long_name;
+                     break;
+                 case 'locality':
+                     $city = $component->long_name;
+                     break;
+                 case 'administrative_area_level_2':
+                     $province = $component->long_name." (".$component->short_name.")";
+                     break;
+                 case 'administrative_area_level_1':
+                     $region = $component->long_name;
+                     break;
+                 case 'country':
+                     $country = $component->long_name;
+                     break;
+                 case 'postal_code':
+                     $postal_code = $component->long_name;
+                     break;
+             }
+         }
+         if(strlen($street_number)){
+             $street .= ",".$street_number;
+         }
+         $address->setRoute($street);
+         $address->setCity($city);
+         $address->setProvince($province);
+         $address->setRegion($region);
+         $address->setCountry($country);
+         $address->setPostalCode($postal_code);
+
          $address->setLatitude($geocode->geometry->location->lat);
          $address->setLongitude($geocode->geometry->location->lng);
+
          $this->form = new AddressForm($address);
      }
      else{

@@ -15,6 +15,8 @@
 
         <div class="widget-body">
             <?php echo $form->renderGlobalErrors() ?>
+            <?php echo $form['_csrf_token'] ?>
+            <?php echo $form[$form->getCSRFFieldName()]->render() ?>
             <!-- Row -->
             <div class="row-fluid">
 
