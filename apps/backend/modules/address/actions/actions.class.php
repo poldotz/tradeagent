@@ -94,7 +94,7 @@ class addressActions extends sfActions
                  case 'street_number':
                      $street_number = $component->long_name;
                      break;
-                 case 'locality':
+                 case 'administrative_area_level_3':
                      $city = $component->long_name;
                      break;
                  case 'administrative_area_level_2':

@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [bootstrap.css,responsive.css,glyphicons.css,style-light.css]
 
-  javascripts:    [jquery.min.js,jquery-ui/js/jquery-ui-1.9.2.custom.min.js,jquery-ui-touch-punch/jquery.ui.touch-punch.min.js,bootstrap.js]
+  javascripts:    [jquery.min.js,jquery-ui/js/jquery-ui-1.9.2.custom.min.js,jquery-ui-touch-punch/jquery.ui.touch-punch.min.js,bootstrap.js, twitter-bootstrap-hover-dropdown.js]
 
   has_layout:     true
   layout:         layout
