@@ -1,8 +1,17 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: lpodda
+ * Date: 9/13/13
+ * Time: 6:11 PM
+ * To change this template use File | Settings | File Templates.
+ */
+?>
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
 <form class="form-horizontal" style="margin-bottom: 0;" action="<?php echo url_for('address/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-   <?php $form->renderHiddenFields(true); ?>
+    <?php $form->renderHiddenFields(true); ?>
     <?php if (!$form->getObject()->isNew()): ?>
         <input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
@@ -97,11 +106,11 @@
                 </div>
             </div>
             <!-- Form actions -->
-              <div class="form-actions">
+            <div class="form-actions">
                 <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php echo __('Save') ?></button>
-               <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
-             </div>
+                <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
+            </div>
         </div>
     </div>
 </form>
-&nbsp;<a href="<?php echo url_for('address/index') ?>"><?php echo __('Back to list') ?></a>
+&nbsp;<!-- <a href="<?php //echo url_for('address/index') ?>"><?php //echo __('Back to list') ?></a> -->

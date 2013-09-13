@@ -38,4 +38,3 @@
         </div>
 </form>
 <div id='results'></div>
-&nbsp;<a href="<?php echo url_for('address/index') ?>"><?php echo __('Back to list') ?></a>

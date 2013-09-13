@@ -12,4 +12,11 @@ class AddressComponents extends sfComponents
     {
         $this->form = new GeolocatorSearchForm();
     }
+
+    public function executeAddress(sfWebRequest $request)
+    {
+        $this->addresss = Doctrine_Core::getTable('Address')
+            ->createQuery('a')
+            ->execute();
+    }
 }

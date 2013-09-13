@@ -21,7 +21,7 @@ class companyActions extends sfActions
         $response = $this->getResponse();
         $response->addJavaScript('jquery.dataTables.min.js','last');
         $response->addJavaScript('dt.bootstrap.js','last');
-        $response->addJavaScript('tables.js','last');
+        $response->addJavaScript('jquery.bootstrap.wizard.js','last');
     }
 
 
