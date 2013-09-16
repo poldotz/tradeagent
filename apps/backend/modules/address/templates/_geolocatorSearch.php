@@ -1,5 +1,6 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
+
 <?php use_javascript('geosearch','last') ?>
 
 <form onsubmit="return false" id="geolocatorSearchForm" class="form-horizontal" style="margin-bottom: 0;" action="<?php echo url_for('geolocator_search')?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
@@ -36,5 +37,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </form>
 <div id='results'></div>

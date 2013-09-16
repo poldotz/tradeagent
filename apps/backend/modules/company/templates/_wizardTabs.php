@@ -11,7 +11,7 @@
  <?php $i = 1; ?>
     <?php foreach($steps as $module => $action): ?>
         <?php ($i == 1) ? $active = 'class="active"' : $active = "" ?>
-            <?php echo '<li '.$active.' ><a href="#tab-'.$i.'" data-toggle="tab"><i></i><span>'.$module.'</span></a></li>'; ?>
+            <?php echo '<li '.$active.' ><a href="#tab-'.$i.'" class="glyphicons user" data-toggle="tab"><i></i><span class="strong">'.$module.'</span><span>details</span></a></li>'; ?>
             <?php $i++; ?>
     <?php endforeach; ?>
 </ul>

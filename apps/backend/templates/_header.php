@@ -14,7 +14,7 @@
     <!-- Top Menu Right -->
     <ul class="topnav pull-left">
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo __('Administration')?> <span class="caret"></span></a>
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo __('Administration')?> <span class="car"caret"></span></a>
             <ul class="dropdown-menu" id="menu1">
                 <li class="dropdown-submenu">
                     <a href="#"><?php echo __('Company') ?></a>

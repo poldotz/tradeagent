@@ -11,7 +11,7 @@
 class addressActions extends sfActions
 {
 
-    public function preExecute()
+    /*public function preExecute()
     {
         $response = $this->getResponse();
         $response->addStylesheet('gmap3.css','last');
@@ -24,32 +24,22 @@ class addressActions extends sfActions
         $response->addJavaScript('gmap3.js','last');
 
 
-    }
+    }*/
 
   public function executeGeolocatorSearch(sfWebRequest $request){
 
-
   $form = new GeoSearchForm();
-
 
   $form->bind($request->getParameter($form->getName()));
   if ($form->isValid())
   {
     $url = Address::buildUrl(implode(' ',$request->getParameter($form->getName())));
     $geocodes = Address::retrieveGeocodesFromUrl($url);
-    // versione 5.4
-    //$country = $request->getParameter($form->getName())['country'];
-    // versione 5.3
-    //$country = $request->getParameter($form->getName());
-    //$country = $country['country'];
-    //$country_url = Address::buildCountryUrl(strtolower($country));
-    //$country_code = Address::retrieveGeocodesFromUrl($country_url);
 
     if ($request->isXmlHttpRequest())
     {
         $this->getUser()->setFlash('geocodes',$geocodes);
         return $this->renderPartial('address/list', array('results' => $geocodes));
-        //sfView::SUCCESS;
     }
   }
   else{

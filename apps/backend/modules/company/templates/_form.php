@@ -2,6 +2,7 @@
 <?php use_javascripts_for_form($form) ?>
 
 <?php $steps = array('company'=>'personalInfo','address'=>'geolocatorSearch'); ?>
+
     <!-- Widget -->
  <div <div class="wizard">
         <div class="widget widget-tabs widget-tabs-double">

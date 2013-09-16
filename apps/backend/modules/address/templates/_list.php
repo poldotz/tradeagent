@@ -17,25 +17,32 @@
             <h4 class="heading"><?php echo __('Search Result') ?> : </h4>
         </div>
 
-        <div class="widget-body"
+        <div id="resultLinks"class="widget-body">
             <?php $address = "" ?>
         <?php foreach($results as $key => $result): ?>
             <div class="row-fluid">
-                <div class="span12"><?php echo link_to($result->formatted_address,'address/new?geocodes='.$key) ?> </div>
+                <div class="span12"><span style="cursor: pointer" class="text-info geoResults" rel="<?php echo url_for('address/new?geocodes='.$key) ?>"><?php echo $result->formatted_address ?></span></div>
                 <?php $address .= "{address:'".$result->formatted_address."', data:'".$result->formatted_address."'}," ?>
                 <?php $coordinates[$key]['lat'] = $result->geometry->location->lat; ?>
                 <?php $coordinates[$key]['lng'] = $result->geometry->location->lng; ?>
             </div>
         <?php endforeach; ?>
             <?php $address = substr($address,0,strlen($address)-1); ?>
-        <div class="row-fluid ">
-            <div class="span12">
-                <div class="gmap3" id='geoSearchResutls'></div>
+            <div class="row-fluid ">
+                <div class="span12">
+                    <div class="gmap3" id='geoSearchResutls'></div>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
+
+    <script type="text/javascript">
+        $('.geoResults').click(function() {
+            $('#results').load($(this).attr('rel'));
+            return false;
+        });
+    </script>
     <?php $averagePoint = averageCoodinates($coordinates) ?>
     <script type="text/javascript">
 
@@ -56,6 +63,9 @@
                         draggable: false
                     },
                     events:{
+                        click: function(){
+                            $(document).scrollTop( $("#resultLinks").offset().top );
+                        },
                         mouseover: function(marker, event, context){
                             var map = $(this).gmap3("get"),
                                 infowindow = $(this).gmap3({get:{name:"infowindow"}});
