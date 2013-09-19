@@ -10,7 +10,15 @@
  */
 class GalleryForm extends BaseGalleryForm
 {
-  public function configure()
+
+  public function setup()
   {
+      parent::setup();
+      $this->removeFields();
+      $this->widgetSchema['description'] = new sfWidgetFormTextarea(array(),array('cols'=>'150','rows'=>8));
+  }
+
+      protected function removeFields() {
+      unset($this['created_at'], $this['updated_at'],$this['slug']);
   }
 }
