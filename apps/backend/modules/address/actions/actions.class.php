@@ -29,7 +29,7 @@ class addressActions extends sfActions
   public function executeGeolocatorSearch(sfWebRequest $request){
 
   $form = new GeoSearchForm();
-
+  $params = $request->getParameter($form->getName());
   $form->bind($request->getParameter($form->getName()));
   if ($form->isValid())
   {

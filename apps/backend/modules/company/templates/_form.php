@@ -1,7 +1,7 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php $steps = array('company'=>'personalInfo','address'=>'geolocatorSearch'); ?>
+<?php $steps = array(array('module'=>'company','action'=>'personalInfo','params'=>array()), array('module'=>'address', 'action'=>'geolocatorSearch','params'=>array('object'=>$form->getObject()))); ?>
 
     <!-- Widget -->
  <div <div class="wizard">
@@ -17,10 +17,10 @@
         <div class="widget-body">
           <div class="tab-content">
             <?php $i = 1; ?>
-            <?php foreach($steps as $module => $action): ?>
+            <?php foreach($steps as $step): ?>
                     <?php ($i == 1) ? $active = "active" : $active = "" ?>
                         <div class="tab-pane <?php echo $active ?>" id="tab-<?php echo $i?>">
-                            <?php include_component($module,$action) ?>
+                            <?php include_component($step['module'],$step['action'],$step['params']) ?>
                         </div>
                   <?php $i++; ?>
             <?php endforeach; ?>

@@ -14,6 +14,7 @@ class AddressComponents extends sfComponents
         /*
          * css includes
          */
+        $object = $this->object;
         $response = $this->getResponse();
         $response->addStylesheet('gmap3.css','last');
         /*
@@ -21,7 +22,8 @@ class AddressComponents extends sfComponents
          */
         $response->addJavascript("https://maps.googleapis.com/maps/api/js?key=".sfConfig::get('app_gmap_api_key')."&sensor=false");
         $response->addJavaScript('gmap3.js','last');
-        $this->form = new GeolocatorSearchForm();
+
+        $this->form = new GeolocatorSearchForm(array('object'=>$object));
     }
 
     public function executeAddress(sfWebRequest $request)

@@ -4,7 +4,7 @@
 <?php use_javascript('geosearch','last') ?>
 
 <form onsubmit="return false" id="geolocatorSearchForm" class="form-horizontal" style="margin-bottom: 0;" action="<?php echo url_for('geolocator_search')?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-
+    <?php echo $form->renderHiddenFields(); ?>
     <!-- Widget -->
     <div class="widget">
         <!-- Widget heading -->
