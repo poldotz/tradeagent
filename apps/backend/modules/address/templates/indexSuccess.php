@@ -1,5 +1,3 @@
-<?php include_component('address','geolocatorSearch'); ?>
-
 <h1><?php echo __('Address') ?></h1>
 
 <table class="dynamicTable table table-striped table-bordered table-condensed">

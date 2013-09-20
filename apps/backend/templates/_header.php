@@ -26,18 +26,24 @@
                 <li class="dropdown-submenu">
                     <a href="#"><?php echo __('Agent') ?></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo link_to(__('New'),'Agent/new')?></li>
-                        <li><?php echo link_to(__('list'),'Agent/index')?></li>
+                        <li><?php echo link_to(__('New'),'agent/new')?></li>
+                        <li><?php echo link_to(__('list'),'agent/index')?></li>
                     </ul>
                 </li>
                 <li class="dropdown-submenu">
                     <a href="#"><?php echo __('Customer') ?></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo link_to(__('New'),'Customer/new')?></li>
-                        <li><?php echo link_to(__('list'),'Customer/index')?></li>
+                        <li><?php echo link_to(__('New'),'customer/new')?></li>
+                        <li><?php echo link_to(__('list'),'customer/index')?></li>
                     </ul>
                 </li>
-                <li><a href="#">Something else here</a></li>
+                <li class="dropdown-submenu">
+                    <a href="#"><?php echo __('Gallery') ?></a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo link_to(__('New'),'gallery/new')?></li>
+                        <li><?php echo link_to(__('list'),'gallery/index')?></li>
+                    </ul>
+                </li>
                 <li class="divider"></li>
                 <li><a href="#">Separated link</a></li>
             </ul>

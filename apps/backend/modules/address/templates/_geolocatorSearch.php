@@ -32,7 +32,7 @@
                     <div class="form-actions">
                         <button id="submitGeoSearch" type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i><?php echo __('search') ?></button>
                         <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
-                        <img id="loader" width="30px;" height="30px;" src="images/loading.gif" style="vertical-align: middle; display: none" />
+                        <?php echo image_tag('loading.gif',array('id'=>"loader" ,'width'=>"30px;", 'height'=>"30px;",'style'=>"vertical-align: middle; display: none"))?>
                     </div>
                 </div>
             </div>
