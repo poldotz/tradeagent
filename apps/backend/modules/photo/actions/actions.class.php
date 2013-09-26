@@ -34,6 +34,7 @@ class photoActions extends sfActions
         $response->addJavaScript('jquery.fileupload-image.js','last');
         $response->addJavaScript('jquery.fileupload-video.js','last');
         $response->addJavaScript('jquery.fileupload-validate.js','last');
+        $response->addJavaScript('jquery.fileupload-ui.js','last');
         $response->addJavaScript('main.js','last');
         /*<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
         <!--[if (gte IE 8)&(lt IE 10)]>
