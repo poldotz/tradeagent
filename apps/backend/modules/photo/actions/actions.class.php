@@ -16,7 +16,7 @@ class photoActions extends sfActions
         $response = $this->getResponse();
         $response->addStylesheet('blueimp-gallery.min.css','last');
         $response->addStylesheet('jquery.fileupload-ui.css','last');
-        $response->addStylesheet('jquery.fileupload-ui-noscript.css','last');
+        //$response->addStylesheet('jquery.fileupload-ui-noscript.css','last');
 
     }
 

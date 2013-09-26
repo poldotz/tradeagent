@@ -1,4 +1,4 @@
-/*
+    /*
  * jQuery File Upload Plugin JS Example 8.8.2
  * https://github.com/blueimp/jQuery-File-Upload
  *
@@ -14,7 +14,7 @@
 
 $(function () {
     'use strict';
-    var url = window.location.hostname === 'tradeanget' ? '//tradeagent/backend_dev.php/photos' : '';
+    var url = window.location.hostname === 'tradeagent' ? '//tradeagent/backend_dev.php/photo/upload' : '';
 
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
@@ -33,31 +33,6 @@ $(function () {
         )
     );
 
-    if (window.location.hostname === 'blueimp.github.io') {
-        // Demo settings:
-        $('#fileupload').fileupload('option', {
-            url: '//jquery-file-upload.appspot.com/',
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator.userAgent),
-            maxFileSize: 5000000,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
-        });
-        // Upload server status check for browsers with CORS support:
-        if ($.support.cors) {
-            $.ajax({
-                url: '//jquery-file-upload.appspot.com/',
-                type: 'HEAD'
-            }).fail(function () {
-                $('<div class="alert alert-danger"/>')
-                    .text('Upload server currently unavailable - ' +
-                            new Date())
-                    .appendTo('#fileupload');
-            });
-        }
-    } else {
         // Load existing files:
         $('#fileupload').addClass('fileupload-processing');
         $.ajax({
@@ -72,5 +47,4 @@ $(function () {
             $(this).fileupload('option', 'done')
                 .call(this, null, {result: result});
         });
-    }
 });
