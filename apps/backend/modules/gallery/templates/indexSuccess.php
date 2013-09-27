@@ -1,28 +1,28 @@
-<h1>Gallerys List</h1>
+<h1><?php echo __('Galleries') ?></h1>
 
-<table>
-  <thead>
+<table class="dynamicTable table table-striped table-bordered table-condensed">
+    <thead>
     <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Created at</th>
-      <th>Updated at</th>
-      <th>Slug</th>
+        <th><?php echo __('Title')?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Created at') ?></th>
+        <th><?php echo __('Actions') ?></th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <?php foreach ($gallerys as $gallery): ?>
-    <tr>
-      <td><a href="<?php echo url_for('gallery/edit?id='.$gallery->getId()) ?>"><?php echo $gallery->getId() ?></a></td>
-      <td><?php echo $gallery->getTitle() ?></td>
-      <td><?php echo $gallery->getDescription() ?></td>
-      <td><?php echo $gallery->getCreatedAt() ?></td>
-      <td><?php echo $gallery->getUpdatedAt() ?></td>
-      <td><?php echo $gallery->getSlug() ?></td>
-    </tr>
+        <tr>
+            <td><?php echo $gallery->getTitle() ?></td>
+            <td><?php echo $gallery->getDescription() ?></td>
+            <td><?php echo $gallery->getCreatedAt() ?></td>
+            <td>
+                <a href="<?php echo url_for('gallery/edit?id='.$gallery->getId()) ?>"><?php echo _('Edit') ?></a>
+                <a href="<?php echo url_for('photo/new') ?>"><?php echo _('Photos') ?></a>
+            </td>
+
+        </tr>
     <?php endforeach; ?>
-  </tbody>
+    </tbody>
 </table>
 
   <a href="<?php echo url_for('gallery/new') ?>">New</a>

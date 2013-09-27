@@ -51,20 +51,24 @@ class photoActions extends sfActions
 
   public function executeIndex(sfWebRequest $request)
   {
-    $this->photoss = Doctrine_Core::getTable('Photos')
-      ->createQuery('a')
-      ->execute();
+        $this->photoss = Doctrine_Core::getTable('Photos')
+        ->createQuery('a')
+        ->execute();
+
   }
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new PhotosForm();
+      if($request->hasParameter('gallery_id')){
+                $this->form = new PhotosForm();
+      }
   }
 
   public function executeUpload(sfWebRequest $request){
       $request = $request;
       try{
         $upload = new UploadHandler();
+        $upload = $upload;
       }
       catch(Exception $e){
           print_r($e->getMessage());

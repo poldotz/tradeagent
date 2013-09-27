@@ -4,6 +4,8 @@
 <form action="<?php echo url_for('gallery/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
+
+    <a href="<?php echo url_for('photo/new') ?>" class="btn btn-success">Photo Gallery</a>
 <?php endif; ?>
   <table>
     <tfoot>

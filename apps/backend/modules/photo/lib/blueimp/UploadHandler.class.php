@@ -541,6 +541,7 @@ class UploadHandler
 
     protected function handle_form_data($file, $index) {
         // Handle form data, e.g. $_REQUEST['description'][$index]
+        $request = $_REQUEST;
     }
 
     protected function imageflip($image, $mode) {
