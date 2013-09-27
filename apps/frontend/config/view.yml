@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [fr/bootstrap.css,responsive.css,glyphicons.css]
+  stylesheets:    [fr/bootstrap_fr.css,responsive.css,glyphicons.css]
 
-  javascripts:    [jquery.min.js,jquery-ui/js/jquery-ui-1.9.2.custom.min.js,jquery-ui-touch-punch/jquery.ui.touch-punch.min.js,fr/bootstrap_min.js, twitter-bootstrap-hover-dropdown.js]
+  javascripts:    [jquery.min.js,jquery-ui/js/jquery-ui-1.9.2.custom.min.js,jquery-ui-touch-punch/jquery.ui.touch-punch.min.js,fr/bootstrap_fr.min.js, twitter-bootstrap-hover-dropdown.js]
 
   has_layout:     true
   layout:         layout
