@@ -17,7 +17,7 @@
             <td><?php echo $gallery->getCreatedAt() ?></td>
             <td>
                 <a href="<?php echo url_for('gallery/edit?id='.$gallery->getId()) ?>"><?php echo _('Edit') ?></a>
-                <a href="<?php echo url_for('photo/new') ?>"><?php echo _('Photos') ?></a>
+                <a href="<?php echo url_for('photo/photoGallery?gallery_id='.$gallery->getId()) ?>"><?php echo _('Photos') ?></a>
             </td>
 
         </tr>

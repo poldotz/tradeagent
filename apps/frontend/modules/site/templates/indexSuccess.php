@@ -1,7 +1,18 @@
 <div class="jumbotron">
-    <h1>Marketing stuff!</h1>
-    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-    <a class="btn btn-large btn-success" href="#">Get started today</a>
+    <h2>Lightbox image gallery</h2>
+    <!-- The container for the list of example images -->
+    <div id="links" class="links"></div>
+
+    <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
 </div>
 
 <hr>

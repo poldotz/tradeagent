@@ -36,7 +36,7 @@ class UploadHandler
 
     function __construct($options = null, $initialize = true, $error_messages = null) {
         $this->options = array(
-            'script_url' => $this->get_full_url().'/backend_dev.php/photo/upload',
+            'script_url' => $this->get_full_url().'/photo/upload',
             'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/uploads/',
             'upload_url' => $this->get_full_url().'/uploads/',
             'user_dirs' => false,
@@ -93,21 +93,21 @@ class UploadHandler
             'image_versions' => array(
                 // Uncomment the following version to restrict the size of
                 // uploaded images:
-                /*
+
                 '' => array(
                     'max_width' => 1920,
                     'max_height' => 1200,
                     'jpeg_quality' => 95
                 ),
-                */
+
                 // Uncomment the following to create medium sized images:
-                /*
+
                 'medium' => array(
                     'max_width' => 800,
                     'max_height' => 600,
                     'jpeg_quality' => 80
                 ),
-                */
+
                 'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.
@@ -910,7 +910,7 @@ class UploadHandler
         return $this->generate_response($response, $print_response);
     }
 
-    public function post($print_response = true) {
+    public function post($print_response = false) {
         if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
             return $this->delete($print_response);
         }
