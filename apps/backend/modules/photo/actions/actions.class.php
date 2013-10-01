@@ -97,9 +97,7 @@ class photoActions extends sfActions
                   $files = $upload->head();
                   break;
               case 'GET':
-                  $files = array(); // non viene letto nessun file.
                   $files = $upload->get();
-                  $this->files = $files;
                   break;
               case 'PATCH':
               case 'PUT':
@@ -118,14 +116,27 @@ class photoActions extends sfActions
                   break;
               case 'DELETE':
                   $file = $request->getParameter('file');
-                  $files = $upload->delete();
+                  $gallery_id = $request->getParameter('gallery_id');
+                  $q = Doctrine_Query::create()
+                      ->delete('Photos p')
+                      ->where('p.gallery_id = ?',$gallery_id)
+                      ->andWhere('p.picpath LIKE ?','%'.$file.'');
+                  $rows = $q->execute();
+                  if($rows){
+                        $files = $upload->delete();
+                  }else{
+                    $files = array();
+                  }
                   break;
               default:
                   header('HTTP/1.1 405 Method Not Allowed');
           }
         $upload->head();
         $files = json_encode($files);
-        echo $files;
+        if($method == 'POST'){
+            echo $files;
+        }
+        sfView::NONE;
       }
       catch(Exception $e){
           print_r($e->getMessage());

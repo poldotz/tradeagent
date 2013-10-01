@@ -70,7 +70,7 @@
             {% } %}
         </td>
         <td class="title">
-            <label>Title: <input name="title[]" value="{%=file.name.substr(0    ,file.name.lastIndexOf('.'))%}" required></label></td>
+            <label>Title: <input name="title[]" value="{%=file.name.substr(0,file.name.lastIndexOf('.'))%}" required></label></td>
         <td>
             <p class="size">{%=o.formatFileSize(file.size)%}</p>
             {% if (!o.files.error) { %}
@@ -122,7 +122,7 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
-            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl+'&gallery_id=<?php echo $gallery_id ?>'%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
             <i class="glyphicon glyphicon-trash"></i>
             <span>Delete</span>
             </button>

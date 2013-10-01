@@ -37,7 +37,8 @@ class PhotoComponents extends sfComponents
         $response->addJavaScript('jquery.fileupload-video.js','last');
         $response->addJavaScript('jquery.fileupload-validate.js','last');
         $response->addJavaScript('jquery.fileupload-ui.js','last');
-        $response->addJavaScript('main.js','last');
+
+        $response->addJavaScript('main.js','last',array('gallery_id' => $this->gallery_id));
 
     }
 }
