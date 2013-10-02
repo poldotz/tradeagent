@@ -28,8 +28,17 @@ class addressActions extends sfActions
 
   public function executeGeolocatorSearch(sfWebRequest $request){
 
-  $form = new GeoSearchForm();
-  $params = $request->getParameter($form->getName());
+    $form = new GeoSearchForm();
+    $params = $request->getParameter($form->getName());
+    if(isset($params['external_class']) && isset($params['external_id'])){
+        $class = $params['external_class'];
+        $object = new $class();
+        $object->setId($params['external_id']);
+        $form = new GeoSearchForm(array('object'=>$object));
+    }
+
+
+
   $form->bind($request->getParameter($form->getName()));
   if ($form->isValid())
   {

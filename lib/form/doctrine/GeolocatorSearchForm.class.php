@@ -17,9 +17,19 @@ class GeolocatorSearchForm extends BaseForm
       if(array_key_exists('object',$defaults)){
 
           $object = $defaults['object'];
-          $this->setWidget(get_class($object), new sfWidgetFormInputHidden());
-          $this->setValidator(get_class($object),new sfValidatorInteger());
-          $this->setDefault(get_class($object),$object->getId());
+          if($object->isNew()){
+              $external_id = 0;
+          }else{
+              $external_id = $object->getId();
+          }
+
+          $this->setWidget('external_class', new sfWidgetFormInputHidden());
+          $this->setValidator('external_class',new sfValidatorString());
+          $this->setDefault('external_class',get_class($object));
+
+          $this->setWidget('external_id', new sfWidgetFormInputHidden());
+          $this->setValidator('external_id',new sfValidatorInteger());
+          $this->setDefault('external_id',$external_id);
       }
 
       $this->disableCSRFProtection();
