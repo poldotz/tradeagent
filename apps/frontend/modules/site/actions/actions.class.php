@@ -14,7 +14,7 @@ class siteActions extends sfActions
     public function preExecute()
     {
         $response = $this->getResponse();
-        $response->addStylesheet('bootstrap_calendar.css','last');
+        $response->addStylesheet('datepicker.css','last');
         /*$response->addStylesheet('gallery/blueimp-gallery.min.css','last');
         $response->addStylesheet('gallery/blueimp-gallery-indicator.css','last');
         $response->addStylesheet('gallery/blueimp-gallery-video.css','last');
@@ -24,7 +24,7 @@ class siteActions extends sfActions
 
     public function postExecute(){
         $response = $this->getResponse();
-        $response->addJavaScript('zebra_datepicker.src.js','last');
+        $response->addJavaScript('bootstrap-datepicker.js','last');
         /*$response->addJavaScript('gallery/blueimp-helper.js','last');
         $response->addJavaScript('gallery/blueimp-gallery.js','last');
         $response->addJavaScript('gallery/blueimp-fullscreen.js','last');
@@ -45,8 +45,6 @@ class siteActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-
-
 
   }
 }
