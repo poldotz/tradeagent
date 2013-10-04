@@ -8,11 +8,18 @@
     <?php include_stylesheets() ?>
       <style type="text/css">
           body {
-              padding-top: 15px;
+              background: url("../images/sfondo_ca.jpg") no-repeat fixed left top #E3E0D9;
+              color: #777777;
+              font-family: arial;
+              font-size: 12px;
+              line-height: 18px;
+              /*min-width: 1100px;*/
+              width: 100%;
+              padding-top: 100px;
               padding-bottom: 60px;
           }
 
-              /* Custom container */
+          /* Custom container */
           .container {
               margin: 0 auto;
               max-width: 1000px;
@@ -84,7 +91,7 @@
   <div class="container">
 
       <div class="masthead">
-          <h2 style="color: #800000 ">B&amp;B Le Vie del Centro</h2>
+          <h2  class="text-center" style="color: #ffffff ">B&amp;B Le Vie del Centro</h2>
           <div class="navbar">
               <div class="navbar-inner">
                   <div class="container">

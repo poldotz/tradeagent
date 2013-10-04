@@ -1,5 +1,5 @@
 <!-- Example row of columns -->
-<div class="row-fluid">
+<div class="row-fluid ">
     <br/>
     <div class="span12">
         <h2>dati della stanza</h2>
