@@ -45,10 +45,18 @@ class addressActions extends sfActions
     $url = Address::buildUrl(implode(' ',$request->getParameter($form->getName())));
     $geocodes = Address::retrieveGeocodesFromUrl($url);
 
-    if ($request->isXmlHttpRequest())
+    if ($request->isXmlHttpRequest() && $geocodes)
     {
         $this->getUser()->setFlash('geocodes',$geocodes);
         return $this->renderPartial('address/list', array('results' => $geocodes));
+    }
+    else{
+        if ($request->isXmlHttpRequest())
+        {
+            $form->getErrorSchema()->addError(new sfValidatorError(new sfValidatorSchema(), 'indirizzo non valido'), 'route');
+            return $this->renderPartial('address/errorList', array('form' => $form));
+            //sfView::SUCCESS;
+        }
     }
   }
   else{
@@ -84,45 +92,46 @@ class addressActions extends sfActions
          $region = "";
          $country = "";
          $postal_code = "";
-
-         foreach($geocode->address_components as $component){
-             switch($component->types[0]){
-                 case 'route':
-                     $street = $component->long_name;
-                     break;
-                 case 'street_number':
-                     $street_number = $component->long_name;
-                     break;
-                 case 'administrative_area_level_3':
-                     $city = $component->long_name;
-                     break;
-                 case 'administrative_area_level_2':
-                     $province = $component->long_name." (".$component->short_name.")";
-                     break;
-                 case 'administrative_area_level_1':
-                     $region = $component->long_name;
-                     break;
-                 case 'country':
-                     $country = $component->long_name;
-                     break;
-                 case 'postal_code':
-                     $postal_code = $component->long_name;
-                     break;
+         if(is_object($geocode)){
+             foreach($geocode->address_components as $component){
+                 switch($component->types[0]){
+                     case 'route':
+                         $street = $component->long_name;
+                         break;
+                     case 'street_number':
+                         $street_number = $component->long_name;
+                         break;
+                     case 'administrative_area_level_3':
+                         $city = $component->long_name;
+                         break;
+                     case 'administrative_area_level_2':
+                         $province = $component->long_name." (".$component->short_name.")";
+                         break;
+                     case 'administrative_area_level_1':
+                         $region = $component->long_name;
+                         break;
+                     case 'country':
+                         $country = $component->long_name;
+                         break;
+                     case 'postal_code':
+                         $postal_code = $component->long_name;
+                         break;
+                 }
              }
-         }
-         if(strlen($street_number)){
-             $street .= ",".$street_number;
-         }
-         $address->setRoute($street);
-         $address->setCity($city);
-         $address->setProvince($province);
-         $address->setRegion($region);
-         $address->setCountry($country);
-         $address->setPostalCode($postal_code);
 
-         $address->setLatitude($geocode->geometry->location->lat);
-         $address->setLongitude($geocode->geometry->location->lng);
+             if(strlen($street_number)){
+                 $street .= ",".$street_number;
+             }
+             $address->setRoute($street);
+             $address->setCity($city);
+             $address->setProvince($province);
+             $address->setRegion($region);
+             $address->setCountry($country);
+             $address->setPostalCode($postal_code);
 
+             $address->setLatitude($geocode->geometry->location->lat);
+             $address->setLongitude($geocode->geometry->location->lng);
+         }
          $this->form = new AddressForm($address);
      }
      else{

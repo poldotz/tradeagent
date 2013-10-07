@@ -57,7 +57,7 @@ class Address extends BaseAddress
             $results = $codes->results;
         }
         else{
-            $results['result'][] = false;
+            $results = false;
         }
 
         return $results;
