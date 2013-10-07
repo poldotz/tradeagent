@@ -14,7 +14,7 @@ class photoActions extends sfActions
     public function preExecute()
     {
         $response = $this->getResponse();
-        $response->addStylesheet('blueimp-gallery.min.css','last');
+        $response->addStylesheet('gallery/blueimp-gallery.min.css','last');
         $response->addStylesheet('jquery.fileupload-ui.css','last');
         //$response->addStylesheet('jquery.fileupload-ui-noscript.css','last');
 
@@ -88,7 +88,7 @@ class photoActions extends sfActions
               $options['upload_url'] = $server_url.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.$gallery_id.DIRECTORY_SEPARATOR;
           }
 
-          $upload = new UploadHandler($options,false);
+              $upload = new UploadHandler($options,false);
           $method = $this->getRequest()->getMethod();
 
           switch ($method) {
@@ -104,14 +104,22 @@ class photoActions extends sfActions
               case 'POST':
                 $titles = $request->getParameter('title');
                 $files= $upload->post();
-                $i = 0;
+                if($this->getUser()->hasFlash('title')){
+                    $this->getUser()->setFlash('title',$this->getUser()->getFlash('title') + 1);
+                }else{
+                    $this->getUser()->setFlash('title',0);
+                }
+                $i = $this->getUser()->getFlash('title');
+
                 foreach($files as $file ){
                     $photo = new Photos();
                     $photo->setGalleryId($gallery_id);
-                    $photo->setPicpath($file[0]->url);
+                    $picpath = substr($file[0]->url,0,(strrpos($file[0]->url, "/")+1));
+                    $file_name =  substr(strrchr($file[0]->url,"/"),1);
+                    $photo->setPicpath($picpath);
+                    $photo->setFileName($file_name);
                     $photo->setTitle($titles[$i]);
                     $photo->save();
-                    $i++;
                 }
                   break;
               case 'DELETE':
@@ -122,20 +130,17 @@ class photoActions extends sfActions
                       ->where('p.gallery_id = ?',$gallery_id)
                       ->andWhere('p.picpath LIKE ?','%'.$file.'');
                   $rows = $q->execute();
-                  if($rows){
-                        $files = $upload->delete();
-                  }else{
-                    $files = array();
-                  }
+                  $files = $upload->delete();
                   break;
               default:
                   header('HTTP/1.1 405 Method Not Allowed');
           }
-        $upload->head();
+        //$upload->head();
         $files = json_encode($files);
         if($method == 'POST'){
             echo $files;
         }
+          exit;
         sfView::NONE;
       }
       catch(Exception $e){

@@ -16,7 +16,7 @@ class PhotoComponents extends sfComponents
          */
 
         $response = $this->getResponse();
-        $response->addStylesheet('blueimp-gallery.min.css','last');
+        $response->addStylesheet('gallery/blueimp-gallery.min.css','last');
         $response->addStylesheet('jquery.fileupload-ui.css','last');
 
         /*

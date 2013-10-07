@@ -9,6 +9,7 @@
  * @property string $name
  * @property clob $description
  * @property bigint $quantity
+ * @property boolean $consumable
  * @property decimal $price
  * @property decimal $offer_price
  * @property datetime $offer_end_date
@@ -18,33 +19,38 @@
  * @property Gallery $Gallery
  * @property Category $Category
  * @property Company $Company
+ * @property Doctrine_Collection $product_booking
  * 
- * @method string   getCode()           Returns the current record's "code" value
- * @method string   getName()           Returns the current record's "name" value
- * @method clob     getDescription()    Returns the current record's "description" value
- * @method bigint   getQuantity()       Returns the current record's "quantity" value
- * @method decimal  getPrice()          Returns the current record's "price" value
- * @method decimal  getOfferPrice()     Returns the current record's "offer_price" value
- * @method datetime getOfferEndDate()   Returns the current record's "offer_end_date" value
- * @method bigint   getCategoryId()     Returns the current record's "category_id" value
- * @method bigint   getCompanyId()      Returns the current record's "company_id" value
- * @method bigint   getGalleryId()      Returns the current record's "gallery_id" value
- * @method Gallery  getGallery()        Returns the current record's "Gallery" value
- * @method Category getCategory()       Returns the current record's "Category" value
- * @method Company  getCompany()        Returns the current record's "Company" value
- * @method Product  setCode()           Sets the current record's "code" value
- * @method Product  setName()           Sets the current record's "name" value
- * @method Product  setDescription()    Sets the current record's "description" value
- * @method Product  setQuantity()       Sets the current record's "quantity" value
- * @method Product  setPrice()          Sets the current record's "price" value
- * @method Product  setOfferPrice()     Sets the current record's "offer_price" value
- * @method Product  setOfferEndDate()   Sets the current record's "offer_end_date" value
- * @method Product  setCategoryId()     Sets the current record's "category_id" value
- * @method Product  setCompanyId()      Sets the current record's "company_id" value
- * @method Product  setGalleryId()      Sets the current record's "gallery_id" value
- * @method Product  setGallery()        Sets the current record's "Gallery" value
- * @method Product  setCategory()       Sets the current record's "Category" value
- * @method Product  setCompany()        Sets the current record's "Company" value
+ * @method string              getCode()            Returns the current record's "code" value
+ * @method string              getName()            Returns the current record's "name" value
+ * @method clob                getDescription()     Returns the current record's "description" value
+ * @method bigint              getQuantity()        Returns the current record's "quantity" value
+ * @method boolean             getConsumable()      Returns the current record's "consumable" value
+ * @method decimal             getPrice()           Returns the current record's "price" value
+ * @method decimal             getOfferPrice()      Returns the current record's "offer_price" value
+ * @method datetime            getOfferEndDate()    Returns the current record's "offer_end_date" value
+ * @method bigint              getCategoryId()      Returns the current record's "category_id" value
+ * @method bigint              getCompanyId()       Returns the current record's "company_id" value
+ * @method bigint              getGalleryId()       Returns the current record's "gallery_id" value
+ * @method Gallery             getGallery()         Returns the current record's "Gallery" value
+ * @method Category            getCategory()        Returns the current record's "Category" value
+ * @method Company             getCompany()         Returns the current record's "Company" value
+ * @method Doctrine_Collection getProductBooking()  Returns the current record's "product_booking" collection
+ * @method Product             setCode()            Sets the current record's "code" value
+ * @method Product             setName()            Sets the current record's "name" value
+ * @method Product             setDescription()     Sets the current record's "description" value
+ * @method Product             setQuantity()        Sets the current record's "quantity" value
+ * @method Product             setConsumable()      Sets the current record's "consumable" value
+ * @method Product             setPrice()           Sets the current record's "price" value
+ * @method Product             setOfferPrice()      Sets the current record's "offer_price" value
+ * @method Product             setOfferEndDate()    Sets the current record's "offer_end_date" value
+ * @method Product             setCategoryId()      Sets the current record's "category_id" value
+ * @method Product             setCompanyId()       Sets the current record's "company_id" value
+ * @method Product             setGalleryId()       Sets the current record's "gallery_id" value
+ * @method Product             setGallery()         Sets the current record's "Gallery" value
+ * @method Product             setCategory()        Sets the current record's "Category" value
+ * @method Product             setCompany()         Sets the current record's "Company" value
+ * @method Product             setProductBooking()  Sets the current record's "product_booking" collection
  * 
  * @package    tradeagent
  * @subpackage model
@@ -69,6 +75,9 @@ abstract class BaseProduct extends sfDoctrineRecord
              ));
         $this->hasColumn('quantity', 'bigint', null, array(
              'type' => 'bigint',
+             ));
+        $this->hasColumn('consumable', 'boolean', null, array(
+             'type' => 'boolean',
              ));
         $this->hasColumn('price', 'decimal', 5, array(
              'type' => 'decimal',
@@ -110,6 +119,10 @@ abstract class BaseProduct extends sfDoctrineRecord
         $this->hasOne('Company', array(
              'local' => 'company_id',
              'foreign' => 'id'));
+
+        $this->hasMany('Booking as product_booking', array(
+             'local' => 'id',
+             'foreign' => 'product_id'));
 
         $blameable0 = new Doctrine_Template_Blameable();
         $taggable0 = new Doctrine_Template_Taggable();

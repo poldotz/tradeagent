@@ -12,8 +12,11 @@
  * @property string $iban
  * @property bigint $sf_guard_user_id
  * @property bigint $address_id
+ * @property bigint $parent_id
  * @property Address $Address
  * @property sfGuardUser $User
+ * @property Agent $Parent
+ * @property Doctrine_Collection $parent_agent
  * @property Doctrine_Collection $CompanyAgent
  * @property Doctrine_Collection $agent_order
  * @property Doctrine_Collection $OrderDetail
@@ -25,8 +28,11 @@
  * @method string              getIban()             Returns the current record's "iban" value
  * @method bigint              getSfGuardUserId()    Returns the current record's "sf_guard_user_id" value
  * @method bigint              getAddressId()        Returns the current record's "address_id" value
+ * @method bigint              getParentId()         Returns the current record's "parent_id" value
  * @method Address             getAddress()          Returns the current record's "Address" value
  * @method sfGuardUser         getUser()             Returns the current record's "User" value
+ * @method Agent               getParent()           Returns the current record's "Parent" value
+ * @method Doctrine_Collection getParentAgent()      Returns the current record's "parent_agent" collection
  * @method Doctrine_Collection getCompanyAgent()     Returns the current record's "CompanyAgent" collection
  * @method Doctrine_Collection getAgentOrder()       Returns the current record's "agent_order" collection
  * @method Doctrine_Collection getOrderDetail()      Returns the current record's "OrderDetail" collection
@@ -37,8 +43,11 @@
  * @method Agent               setIban()             Sets the current record's "iban" value
  * @method Agent               setSfGuardUserId()    Sets the current record's "sf_guard_user_id" value
  * @method Agent               setAddressId()        Sets the current record's "address_id" value
+ * @method Agent               setParentId()         Sets the current record's "parent_id" value
  * @method Agent               setAddress()          Sets the current record's "Address" value
  * @method Agent               setUser()             Sets the current record's "User" value
+ * @method Agent               setParent()           Sets the current record's "Parent" value
+ * @method Agent               setParentAgent()      Sets the current record's "parent_agent" collection
  * @method Agent               setCompanyAgent()     Sets the current record's "CompanyAgent" collection
  * @method Agent               setAgentOrder()       Sets the current record's "agent_order" collection
  * @method Agent               setOrderDetail()      Sets the current record's "OrderDetail" collection
@@ -79,6 +88,9 @@ abstract class BaseAgent extends sfDoctrineRecord
         $this->hasColumn('address_id', 'bigint', null, array(
              'type' => 'bigint',
              ));
+        $this->hasColumn('parent_id', 'bigint', null, array(
+             'type' => 'bigint',
+             ));
     }
 
     public function setUp()
@@ -91,6 +103,14 @@ abstract class BaseAgent extends sfDoctrineRecord
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'sf_guard_user_id',
              'foreign' => 'id'));
+
+        $this->hasOne('Agent as Parent', array(
+             'local' => 'parent_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('Agent as parent_agent', array(
+             'local' => 'id',
+             'foreign' => 'parent_id'));
 
         $this->hasMany('CompanyAgent', array(
              'local' => 'id',

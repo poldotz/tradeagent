@@ -20,6 +20,7 @@ Photos:
       type : string(255)
     picpath:
       type : string(255)
+    file_name: string(255)
     gallery_id:
       type : bigint
     is_default:     { type: boolean, default: false }
@@ -109,8 +110,8 @@ Agent:
     Parent:
       class: Agent
       local: parent_id
-      foreing: id
-      foreignAlis: parent_agent
+      foreign: id
+      foreignAlias: parent_agent
 CompanyAgent:
   actAs:
     Timestampable:

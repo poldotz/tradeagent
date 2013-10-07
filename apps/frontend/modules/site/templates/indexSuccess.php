@@ -1,29 +1,32 @@
-<!-- Example row of columns -->
-<div class="row-fluid ">
-    <br/>
-    <div class="span12">
-        <h2>dati della stanza</h2>
-        <div class="well">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Check in: <input type="text" id="dpd1" value="" class="span2"></th>
-                    <th>Check out: <input type="text" id="dpd2" value="" class="span2"></th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
 </div>
 
-<hr>
+<div id="links" class="links">
 
-<div class="footer">
-    <p>&copy; Company 2013</p>
+    <?php foreach($photos as $photo): ?>
+        <?php echo link_to(image_tag($photo->picpath."/thumbnail/".$photo->file_name),$photo->getPicpath().$photo->file_name,array('alt'=>$photo->getTitle())) ?>
+    <?php endforeach; ?>
 </div>
+
+
 <script>
     $(document).ready(function() {
+
+        document.getElementById('links').onclick = function (event) {
+            event = event || window.event;
+            var target = event.target || event.srcElement,
+                link = target.src ? target.parentNode : target,
+                options = {index: link, event: event},
+                links = this.getElementsByTagName('a');
+            blueimp.Gallery(links, options);
+        }
 
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
